@@ -1,9 +1,10 @@
-import _ from 'lodash';
+import _ from 'lodash'
 import './styles/index.css'
+import moment from 'moment'
 
 let component = () => {
   let ele = document.createElement('div')
-  ele.innerHTML = _.join(['hello', 'charles'], '')
+  ele.innerHTML = _.join(['hello', 'charles '], moment().format())
 
   return ele
 }
