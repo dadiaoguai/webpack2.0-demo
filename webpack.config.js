@@ -10,6 +10,7 @@ module.exports = function (env) {
    output: {
      filename: '[name].js', // name 与 entry 中的属性一一对应
      path: path.resolve(__dirname,'dist'),
+     chunkFilename: '[name].[chunkhash].js'
      // publicPath: './assets/'
    },
    module: {
@@ -23,6 +24,19 @@ module.exports = function (env) {
        {
          test: /\.(png|jpg|gif|svg)$/,
          use: ['file-loader']
+       },
+       {
+         test: /\.js$/,
+         exclude: /node_modules/,
+         use: [
+           {
+             loader: 'babel-loader',
+             options: {
+               presets: ['env'],
+               plugins: ['transform-runtime']
+             }
+           }
+         ]
        }
      ]
    },
