@@ -10,8 +10,8 @@ module.exports = function (env) {
    output: {
      filename: '[name].js', // name 与 entry 中的属性一一对应
      path: path.resolve(__dirname,'dist'),
-     chunkFilename: '[name].[chunkhash].js'
-     // publicPath: './assets/'
+     chunkFilename: '[name].[chunkhash].js',
+     publicPath: '/dist/'
    },
    module: {
      rules: [
@@ -55,8 +55,16 @@ module.exports = function (env) {
      }),
      new webpack.optimize.CommonsChunkPlugin({
        name: 'manifest' // 放置 common runtime code
-     })
+     }),
+     new webpack.HotModuleReplacementPlugin()
    ],
-   devtool: 'cheap-eval-source-map'
+   resolve: {
+     extensions: ['.js','.jsx']
+   },
+   devServer: {
+     historyApiFallback: true,
+     hot: true,
+   },
+   devtool: 'eval-source-map'
  }
 }
