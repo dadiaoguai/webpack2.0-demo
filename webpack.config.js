@@ -9,7 +9,8 @@ module.exports = function (env) {
    },
    output: {
      filename: '[name].js', // name 与 entry 中的属性一一对应
-     path: path.resolve(__dirname,'dist')
+     path: path.resolve(__dirname,'dist'),
+     // publicPath: './assets/'
    },
    module: {
      rules: [
