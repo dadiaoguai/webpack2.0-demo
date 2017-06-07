@@ -18,6 +18,10 @@ module.exports = function (env) {
          use: ExtractTextPlugin.extract({
            use: 'css-loader'
          })
+       },
+       {
+         test: /\.(png|jpg|gif|svg)$/,
+         use: ['file-loader']
        }
      ]
    },
@@ -32,6 +36,7 @@ module.exports = function (env) {
      new webpack.optimize.CommonsChunkPlugin({
        name: 'manifest' // 放置 common runtime code
      })
-   ]
+   ],
+   devtool: 'cheap-eval-source-map'
  }
 }
