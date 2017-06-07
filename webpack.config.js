@@ -17,13 +17,7 @@ module.exports = function (env) {
      rules: [
        {
          test: /\.css$/,
-         use: ExtractTextPlugin.extract({
-           use: 'css-loader'
-         })
-       },
-       {
-         test: /\.(png|jpg|gif|svg)$/,
-         use: ['file-loader']
+         use: ['style-loader','css-loader']
        },
        {
          test: /\.js$/,
@@ -37,11 +31,22 @@ module.exports = function (env) {
              }
            }
          ]
+       },
+       {
+         test: /\.(jpe?g|png|gif|svg)$/i,
+         use: [
+           'url-loader?limit=10240',
+           'img-loader'
+         ]
+       },
+       {
+         test: /\.scss$/,
+         use: ['style-loader','css-loader','sass-loader']
        }
      ]
    },
    plugins: [
-     new ExtractTextPlugin('styles.css'),
+     // new ExtractTextPlugin('styles.css'),
      new webpack.optimize.CommonsChunkPlugin({
        name: 'vendor',
        minChunks: function (module) { // 提取所有的公共vendor
